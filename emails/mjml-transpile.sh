@@ -3,6 +3,6 @@ find . -type f -name '*.html' -delete
 for d in */ ; do
     ls $d *.mjml
     cd $d
-    mjml *.mjml
+    mjml *.mjml -o
     cd ..
 done
