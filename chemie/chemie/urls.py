@@ -19,11 +19,17 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from ..customprofile.views import LoginView
+from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_jwt.views import refresh_jwt_token
+from rest_framework_jwt.views import verify_jwt_token
 
 from chemie.home.views import index
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("token-auth/", obtain_jwt_token),
+    path("token-auth-refresh/", refresh_jwt_token),
+    path("token-auth-verify/", verify_jwt_token),
     path("", include("chemie.home.urls", namespace="frontpage")),
     # Temporary url for front page during Fadderperioden
     path("forside/", index),

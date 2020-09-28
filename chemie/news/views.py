@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import permission_required
+from rest_framework.permissions import IsAuthenticated 
 
 from .models import Article
 from .forms import ArticleForm
@@ -77,6 +78,7 @@ def edit_article(request, article_id, slug):
 
 
 class ListAllArticles(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)  
     queryset = Article.objects.filter(published=True).order_by(
         "-published_date"
     )[:5]
