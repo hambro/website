@@ -20,4 +20,19 @@ urlpatterns = [
     path("jobb/ny/", views.job_create, name="job_create"),
     path("jobb/<int:id>/fjern/", views.job_remove, name="job_delete"),
     path("diplom/", views.statistics, name="statistics"),
+    path(
+        "api/interview/",
+        views.InterviewListCreate.as_view(),
+        name="api interview",
+    ),
+    path(
+        "api/specialization/",
+        views.SpecializationListCreate.as_view(),
+        name="api specialization",
+    ),
+    path(
+        "api/jobadvertisement/",
+        views.JobAdvertisementListCreate.as_view(),
+        name="api jobadvertisement",
+    ),
 ]
