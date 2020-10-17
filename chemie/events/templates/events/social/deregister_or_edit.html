@@ -41,7 +41,7 @@
       <form class="deregister" method="POST">{% csrf_token %}
         {% form form=forms.deregister %}{% endform %}
         <button name='action' value='deregister' type="submit"
-                class="waves-effect waves-light btn btn-primary red">Meld meg av
+                class="waves-effect waves-light btn btn-primary red" style="margin-top: 5px">Meld meg av
         </button>
       </form>
       {% else %}

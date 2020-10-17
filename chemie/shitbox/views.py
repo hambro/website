@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import permission_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import PostForm
 from .models import Submission
+from .serializers import SubmissionSerializer
+
+from rest_framework import generics
 
 
 @login_required
@@ -85,3 +88,12 @@ def toggle_used(request):
         return JsonResponse({"used": submission.used})
     else:
         return redirect("shitbox:list")
+
+class ListAllShitbox(generics.ListCreateAPIView):
+    queryset = Submission.objects.filter(published="True").order_by("-id")
+    serializer_class = SubmissionSerializer
+
+class ShitboxDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Submission.objects.all()
+    serializer_class = SubmissionSerializer
+
