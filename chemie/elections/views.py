@@ -4,7 +4,9 @@ from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 
 from .forms import CastVoteForm
-from .models import Election
+from .models import Candidate, Ticket, Position, Election
+from .serializers import CandidateSerializer, TicketSerializer, PositionSerializer, ElectionSerializer
+from rest_framework import generics
 
 
 @login_required
@@ -121,3 +123,24 @@ def view_previous_election(request, pk):
         return render(
             request, "elections/election/previous_election.html", context
         )
+
+
+class ListAllCandidates(generics.ListAPIView):
+    queryset = Candidate.objects.filter()
+    serializer_class = CandidateSerializer
+
+
+class ListAllTickets(generics.ListAPIView):
+    candidate = Candidate.objects.get(id=candidate_id)
+    queryset = Ticket.objects.filter(candidate=candidate)
+    serializer_class = TicketSerializer
+
+
+class PositionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Position.objects.filter()
+    serializer_class = PositionSerializer
+
+
+class ElectionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Election.objects.filter()
+    serializer_class = ElectionSerializer

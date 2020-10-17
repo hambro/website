@@ -75,9 +75,12 @@ user_urlpatterns = [
         views_admin.manual_rfid_status,
         name="checkin_manually",
     ),
+    path("api/candidate/<int:position_id>/", views.ListAllCandidates.as_view()),
+    path("api/election/<int:election_id>", views.ElectionDetail.as_view()),
+    path("api/ticket/<int:candidate_id>", views.ListAllTickets.as_view()),
+    path("api/position/<int:pk>/", views.PositionDetail.as_view())
 ]
 urlpatterns = admin_urlpatterns + user_urlpatterns
-
 
 """
     path(

@@ -4,11 +4,7 @@ from chemie.customprofile.serializers import UserSerializer
 
 
 class CandidateSerializer(serializers.ModelSerializer):
-    absolute_url = serializers.SerializerMethodField()
-    author = UserSerializer()
-
-    def get_absolute_url(self, obj):
-        return obj.get_absolute_url()
+    user = UserSerializer()
 
     class Meta:
         model = Candidate
