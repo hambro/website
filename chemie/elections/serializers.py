@@ -12,15 +12,20 @@ class CandidateSerializer(serializers.ModelSerializer):
 
 
 class TicketSerializer(serializers.ModelSerializer):
+    candidates = CandidateSerializer(many=True)
+
     class Meta:
         model = Ticket
         fields = "__all__"
 
 
 class PositionSerializer(serializers.ModelSerializer):
+    candidates = CandidateSerializer(many=True)
+
     class Meta:
         model = Position
-        fields = "__all__"
+        fields = ("candidates", "position_name", "spots", "number_of_prevote_tickets",
+                  "blank_votes", "is_active", "is_done", "by_acclamation")
 
 
 class ElectionSerializer(serializers.ModelSerializer):
