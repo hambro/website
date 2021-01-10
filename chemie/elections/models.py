@@ -90,6 +90,10 @@ class Position(models.Model):
         default=1, verbose_name="Antall plasser"
     )
 
+    blank_votes = models.IntegerField(
+        default=0, verbose_name="Antall blanke stemmer"
+    )
+
     number_of_prevote_tickets = models.PositiveSmallIntegerField(
         default=0, verbose_name="Antall personer som har forhåndsstemt"
     )
@@ -257,6 +261,7 @@ class Position(models.Model):
             self.tickets.add(blank_ticket)
             user.profile.voted = True
             user.profile.save()
+            self.blank_votes += 1
             self.save()
         return
 
