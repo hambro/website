@@ -126,13 +126,12 @@ def view_previous_election(request, pk):
 
 
 class ListAllCandidates(generics.ListAPIView):
-    queryset = Candidate.objects.filter()
+    queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
 
 
 class ListAllTickets(generics.ListAPIView):
-    candidate = Candidate.objects.get(id=candidate_id)
-    queryset = Ticket.objects.filter(candidate=candidate)
+    queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
 
 
